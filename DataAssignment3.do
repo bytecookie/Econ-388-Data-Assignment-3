@@ -112,31 +112,184 @@ reg gdp_growth ag_harvester_rate ag_tractor_rate atm_rate bed_hosp_rate ///
     bed_longterm_rate cellphone_rate computer_rate cheque_rate if developed == 0
 estimates store developing_model
 
-* Make Table
-* Collapse the dataset to calculate the average of each variable for each year
-collapse (mean) ag_harvester ag_tractor atm bed_hosp bed_longterm cellphone computer cheque pop ///
-                  ag_harvester_rate ag_tractor_rate atm_rate bed_hosp_rate bed_longterm_rate cellphone_rate ///
-                  computer_rate cheque_rate, by(year)
 
-* Rename the variables for clarity
-rename ag_harvester ag_harvester_avg
-rename ag_tractor ag_tractor_avg
-rename atm atm_avg
-rename bed_hosp bed_hosp_avg
-rename bed_longterm bed_longterm_avg
-rename cellphone cellphone_avg
-rename computer computer_avg
-rename cheque cheque_avg
-rename pop pop_avg
-rename ag_harvester_rate ag_harvester_rate_avg
-rename ag_tractor_rate ag_tractor_rate_avg
-rename atm_rate atm_rate_avg
-rename bed_hosp_rate bed_hosp_rate_avg
-rename bed_longterm_rate bed_longterm_rate_avg
-rename cellphone_rate cellphone_rate_avg
-rename computer_rate computer_rate_avg
-rename cheque_rate cheque_rate_avg
+*************
+*Averages
+*************
+* Calculate the mean for developed countries
+summarize ag_harvester if developed == 1, meanonly
+scalar ag_harvester_dev_avg = r(mean)
 
-* Display the averages for each year
-list year ag_harvester_avg ag_tractor_avg atm_avg bed_hosp_avg bed_longterm_avg ///
-     cellphone_avg computer_avg cheque_avg pop_avg, sep(0)
+summarize ag_tractor if developed == 1, meanonly
+scalar ag_tractor_dev_avg = r(mean)
+
+summarize atm if developed == 1, meanonly
+scalar atm_dev_avg = r(mean)
+
+summarize bed_hosp if developed == 1, meanonly
+scalar bed_hosp_dev_avg = r(mean)
+
+summarize bed_longterm if developed == 1, meanonly
+scalar bed_longterm_dev_avg = r(mean)
+
+summarize cellphone if developed == 1, meanonly
+scalar cellphone_dev_avg = r(mean)
+
+summarize computer if developed == 1, meanonly
+scalar computer_dev_avg = r(mean)
+
+summarize cheque if developed == 1, meanonly
+scalar cheque_dev_avg = r(mean)
+
+summarize pop if developed == 1, meanonly
+scalar pop_dev_avg = r(mean)
+
+summarize ag_harvester_rate if developed == 1, meanonly
+scalar ag_harvester_rate_dev_avg = r(mean)
+
+summarize ag_tractor_rate if developed == 1, meanonly
+scalar ag_tractor_rate_dev_avg = r(mean)
+
+summarize atm_rate if developed == 1, meanonly
+scalar atm_rate_dev_avg = r(mean)
+
+summarize bed_hosp_rate if developed == 1, meanonly
+scalar bed_hosp_rate_dev_avg = r(mean)
+
+summarize bed_longterm_rate if developed == 1, meanonly
+scalar bed_longterm_rate_dev_avg = r(mean)
+
+summarize cellphone_rate if developed == 1, meanonly
+scalar cellphone_rate_dev_avg = r(mean)
+
+summarize computer_rate if developed == 1, meanonly
+scalar computer_rate_dev_avg = r(mean)
+
+summarize cheque_rate if developed == 1, meanonly
+scalar cheque_rate_dev_avg = r(mean)
+
+* Display the results for developed countries
+display "Average ag_harvester (developed): " ag_harvester_dev_avg
+display "Average ag_tractor (developed): " ag_tractor_dev_avg
+display "Average atm (developed): " atm_dev_avg
+display "Average bed_hosp (developed): " bed_hosp_dev_avg
+display "Average bed_longterm (developed): " bed_longterm_dev_avg
+display "Average cellphone (developed): " cellphone_dev_avg
+display "Average computer (developed): " computer_dev_avg
+display "Average cheque (developed): " cheque_dev_avg
+display "Average pop (developed): " pop_dev_avg
+display "Average ag_harvester_rate (developed): " ag_harvester_rate_dev_avg
+display "Average ag_tractor_rate (developed): " ag_tractor_rate_dev_avg
+display "Average atm_rate (developed): " atm_rate_dev_avg
+display "Average bed_hosp_rate (developed): " bed_hosp_rate_dev_avg
+display "Average bed_longterm_rate (developed): " bed_longterm_rate_dev_avg
+display "Average cellphone_rate (developed): " cellphone_rate_dev_avg
+display "Average computer_rate (developed): " computer_rate_dev_avg
+display "Average cheque_rate (developed): " cheque_rate_dev_avg
+
+* Calculate the mean for non-developed countries
+summarize ag_harvester if developed == 0, meanonly
+scalar ag_harvester_nondev_avg = r(mean)
+
+summarize ag_tractor if developed == 0, meanonly
+scalar ag_tractor_nondev_avg = r(mean)
+
+summarize atm if developed == 0, meanonly
+scalar atm_nondev_avg = r(mean)
+
+summarize bed_hosp if developed == 0, meanonly
+scalar bed_hosp_nondev_avg = r(mean)
+
+summarize bed_longterm if developed == 0, meanonly
+scalar bed_longterm_nondev_avg = r(mean)
+
+summarize cellphone if developed == 0, meanonly
+scalar cellphone_nondev_avg = r(mean)
+
+summarize computer if developed == 0, meanonly
+scalar computer_nondev_avg = r(mean)
+
+summarize cheque if developed == 0, meanonly
+scalar cheque_nondev_avg = r(mean)
+
+summarize pop if developed == 0, meanonly
+scalar pop_nondev_avg = r(mean)
+
+summarize ag_harvester_rate if developed == 0, meanonly
+scalar ag_harvester_rate_nondev_avg = r(mean)
+
+summarize ag_tractor_rate if developed == 0, meanonly
+scalar ag_tractor_rate_nondev_avg = r(mean)
+
+summarize atm_rate if developed == 0, meanonly
+scalar atm_rate_nondev_avg = r(mean)
+
+summarize bed_hosp_rate if developed == 0, meanonly
+scalar bed_hosp_rate_nondev_avg = r(mean)
+
+summarize bed_longterm_rate if developed == 0, meanonly
+scalar bed_longterm_rate_nondev_avg = r(mean)
+
+summarize cellphone_rate if developed == 0, meanonly
+scalar cellphone_rate_nondev_avg = r(mean)
+
+summarize computer_rate if developed == 0, meanonly
+scalar computer_rate_nondev_avg = r(mean)
+
+summarize cheque_rate if developed == 0, meanonly
+scalar cheque_rate_nondev_avg = r(mean)
+
+* Display the results for non-developed countries
+display "Average ag_harvester (non-developed): " ag_harvester_nondev_avg
+display "Average ag_tractor (non-developed): " ag_tractor_nondev_avg
+display "Average atm (non-developed): " atm_nondev_avg
+display "Average bed_hosp (non-developed): " bed_hosp_nondev_avg
+display "Average bed_longterm (non-developed): " bed_longterm_nondev_avg
+display "Average cellphone (non-developed): " cellphone_nondev_avg
+display "Average computer (non-developed): " computer_nondev_avg
+display "Average cheque (non-developed): " cheque_nondev_avg
+display "Average pop (non-developed): " pop_nondev_avg
+display "Average ag_harvester_rate (non-developed): " ag_harvester_rate_nondev_avg
+display "Average ag_tractor_rate (non-developed): " ag_tractor_rate_nondev_avg
+display "Average atm_rate (non-developed): " atm_rate_nondev_avg
+display "Average bed_hosp_rate (non-developed): " bed_hosp_rate_nondev_avg
+display "Average bed_longterm_rate (non-developed): " bed_longterm_rate_nondev_avg
+display "Average cellphone_rate (non-developed): " cellphone_rate_nondev_avg
+display "Average computer_rate (non-developed): " computer_rate_nondev_avg
+display "Average cheque_rate (non-developed): " cheque_rate_nondev_avg
+**End of section
+
+
+
+***************
+*To use this code comment the section above that takes the average.
+***************
+// * Make Table
+// * Collapse the dataset to calculate the average of each variable for each year
+// collapse (mean) ag_harvester ag_tractor atm bed_hosp bed_longterm cellphone computer cheque pop ///
+//                   ag_harvester_rate ag_tractor_rate atm_rate bed_hosp_rate bed_longterm_rate cellphone_rate ///
+//                   computer_rate cheque_rate, by(year)
+//
+// * Rename the variables for clarity
+// rename ag_harvester ag_harvester_avg
+// rename ag_tractor ag_tractor_avg
+// rename atm atm_avg
+// rename bed_hosp bed_hosp_avg
+// rename bed_longterm bed_longterm_avg
+// rename cellphone cellphone_avg
+// rename computer computer_avg
+// rename cheque cheque_avg
+// rename pop pop_avg
+// rename ag_harvester_rate ag_harvester_rate_avg
+// rename ag_tractor_rate ag_tractor_rate_avg
+// rename atm_rate atm_rate_avg
+// rename bed_hosp_rate bed_hosp_rate_avg
+// rename bed_longterm_rate bed_longterm_rate_avg
+// rename cellphone_rate cellphone_rate_avg
+// rename computer_rate computer_rate_avg
+// rename cheque_rate cheque_rate_avg
+//
+// * Display the averages for each year
+// list year ag_harvester_avg ag_tractor_avg atm_avg bed_hosp_avg bed_longterm_avg ///
+//      cellphone_avg computer_avg cheque_avg pop_avg, sep(0)
+//	 
